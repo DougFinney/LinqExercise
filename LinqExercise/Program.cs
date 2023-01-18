@@ -21,6 +21,10 @@ namespace LinqExercise
              */
 
             //TODO: Print the Sum of numbers
+            var sum = numbers.Sum();
+            var avg = numbers.Average();
+            Console.WriteLine($"sum: {sum}");
+            Console.WriteLine($"Average: {avg}");
 
             //TODO: Print the Average of numbers
 
