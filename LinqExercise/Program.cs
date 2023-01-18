@@ -22,16 +22,23 @@ namespace LinqExercise
 
             //TODO: Print the Sum of numbers
             var sum = numbers.Sum();
-            var avg = numbers.Average();
-            Console.WriteLine($"sum: {sum}");
-            Console.WriteLine($"Average: {avg}");
-
+            Console.WriteLine($"Sum: {sum}");
+           
             //TODO: Print the Average of numbers
+            var avg = numbers.Average();
+             Console.WriteLine($"Average: {avg}");
 
             //TODO: Order numbers in ascending order and print to the console
+            var asc = numbers.OrderBy(num => num);
+            Console.WriteLine("___");
+            Console.WriteLine("Asc");
+
+            foreach (var num in numbers)
+            { 
+            }
 
             //TODO: Order numbers in decsending order and print to the console
-
+            //var desc = numbers.OrderByDescending(x => x);
             //TODO: Print to the console only the numbers greater than 6
 
             //TODO: Order numbers in any order (acsending or desc) but only print 4 of them **foreach loop only!**
