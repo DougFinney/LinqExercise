@@ -33,12 +33,18 @@ namespace LinqExercise
             Console.WriteLine("___");
             Console.WriteLine("Asc");
 
-            foreach (var num in numbers)
-            { 
+            foreach (var num in asc)
+            {
+                Console.WriteLine(num);
             }
-
             //TODO: Order numbers in decsending order and print to the console
-            //var desc = numbers.OrderByDescending(x => x);
+            var desc = numbers.OrderByDescending(x => x);
+            Console.WriteLine("----");
+            Console.WriteLine("Desc");
+            foreach(var num in desc)
+            {
+                Console.WriteLine(num); 
+            }
             //TODO: Print to the console only the numbers greater than 6
 
             //TODO: Order numbers in any order (acsending or desc) but only print 4 of them **foreach loop only!**
