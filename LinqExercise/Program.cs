@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
@@ -90,20 +91,29 @@ namespace LinqExercise
             }
            
             //TODO: Print all the employees' FullName and Age who are over the age 26 to the console and order this by Age first and then by FirstName in the same result.
-            Console.WriteLine("Seperate Employees Into Catagories:");
+            Console.WriteLine("Employees over 26:");
             var overTwentySix = employees.Where(emp => emp.Age > 26)
                 .OrderBy(emp => emp.Age)
                 .ThenBy(emp => emp.FirstName)
                 .ThenBy(emp => emp.YearsOfExperience);
-            foreach (var person in overTwentySix)
+            foreach (var emp in overTwentySix)
             {
-                Console.WriteLine($"Age: {person.Age} Name: {person.FirstName} YOU: {person.YearsOfExperience}");
-                 
+                Console.WriteLine($"{emp.FullName}, Age: {emp.Age} has {emp.YearsOfExperience} years of experience");
+                Console.WriteLine(); 
             }
             //TODO: Print the Sum and then the Average of the employees' YearsOfExperience if their YOE is less than or equal to 10 AND Age is greater than 35.
-
+            var years = employees.Where(x => x.YearsOfExperience <= 10 && x.Age > 35) .OrderBy(x => x.Age);
+            Console.WriteLine("The Sum & Average:");
+            Console.WriteLine($"Sum {years.Sum(x => x.YearsOfExperience)} Avg {years.Average(x => x.YearsOfExperience)}");
+            Console.WriteLine();
             //TODO: Add an employee to the end of the list without using employees.Add()
+            Console.WriteLine("Add on to list:");
+            employees = employees.Append(new Employee("First", "Last", 98, 1)).ToList();
 
+            foreach (var emp in employees) 
+            { 
+                Console.WriteLine($"{emp.FirstName} {emp.Age}");
+            }
 
             Console.WriteLine();
 
