@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LinqExercise
 {
@@ -23,10 +24,10 @@ namespace LinqExercise
             //TODO: Print the Sum of numbers
             var sum = numbers.Sum();
             Console.WriteLine($"Sum: {sum}");
-           
+
             //TODO: Print the Average of numbers
             var avg = numbers.Average();
-             Console.WriteLine($"Average: {avg}");
+            Console.WriteLine($"Average: {avg}");
 
             //TODO: Order numbers in ascending order and print to the console
             var asc = numbers.OrderBy(num => num);
@@ -41,23 +42,64 @@ namespace LinqExercise
             var desc = numbers.OrderByDescending(x => x);
             Console.WriteLine("----");
             Console.WriteLine("Desc");
-            foreach(var num in desc)
+            foreach (var num in desc)
             {
-                Console.WriteLine(num); 
+                Console.WriteLine(num);
             }
             //TODO: Print to the console only the numbers greater than 6
+            var greaterThanSix = numbers.Where(num => num > 6);
 
+            foreach (var num in greaterThanSix)
+            {
+                Console.WriteLine("Extract");
+                Console.WriteLine(num);
+            }
             //TODO: Order numbers in any order (acsending or desc) but only print 4 of them **foreach loop only!**
-
+            Console.WriteLine("First Four");
+            foreach (var num in asc.Take(4))
+            {
+                Console.WriteLine(num);
+            }
             //TODO: Change the value at index 4 to your age, then print the numbers in decsending order
+            //numbers[4] = 46;
+            //Console.WriteLine("Include my age in place of four.");
+            //foreach (var num in numbers.OrderByDescending(num => num))
+            //{
+            //    Console.WriteLine(num);
+
+            //}
+            Console.WriteLine("Change Age");
+
+            numbers.SetValue(46, 4);
+
+            numbers.ToList().ForEach(Console.WriteLine);
+            Console.WriteLine();
 
             // List of employees ****Do not remove this****
             var employees = CreateEmployees();
 
             //TODO: Print all the employees' FullName properties to the console only if their FirstName starts with a C OR an S and order this in ascending order by FirstName.
-
+            var filtered =
+                employees.Where(person => person.FirstName.StartsWith('C') || person.FirstName.StartsWith('S'))
+                .OrderBy(person => person.FirstName);
+            Console.WriteLine("The Full name of employees who's, first name starts with C or S:");
+            foreach (var employee in filtered)
+            {
+                Console.WriteLine(employee.FullName);
+                Console.WriteLine();
+            }
+           
             //TODO: Print all the employees' FullName and Age who are over the age 26 to the console and order this by Age first and then by FirstName in the same result.
-
+            Console.WriteLine("Seperate Employees Into Catagories:");
+            var overTwentySix = employees.Where(emp => emp.Age > 26)
+                .OrderBy(emp => emp.Age)
+                .ThenBy(emp => emp.FirstName)
+                .ThenBy(emp => emp.YearsOfExperience);
+            foreach (var person in overTwentySix)
+            {
+                Console.WriteLine($"Age: {person.Age} Name: {person.FirstName} YOU: {person.YearsOfExperience}");
+                 
+            }
             //TODO: Print the Sum and then the Average of the employees' YearsOfExperience if their YOE is less than or equal to 10 AND Age is greater than 35.
 
             //TODO: Add an employee to the end of the list without using employees.Add()
@@ -66,8 +108,8 @@ namespace LinqExercise
             Console.WriteLine();
 
             Console.ReadLine();
-        }
 
+        }
         #region CreateEmployeesMethod
         private static List<Employee> CreateEmployees()
         {
@@ -87,4 +129,6 @@ namespace LinqExercise
         }
         #endregion
     }
+
 }
+
